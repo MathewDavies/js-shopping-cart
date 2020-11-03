@@ -1,0 +1,2 @@
+#This should work but doesn't
+ErrorDocument 404 /errorpages/errorpage.html
