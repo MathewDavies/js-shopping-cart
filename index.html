@@ -3,106 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/54a7f48eef.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <title>Document</title>
+    <title>JS Cart</title>
+    <link rel="stylesheet" href="docstyle.css">
 </head>
 <body>
-    <header>
-        <h1>The Bake House</h1>
-        <button id="show-hide-cart"><span id="cart-visibility">Hide Cart </span><span id="basket-number">(0)</span></button>
-    </header>
-    <div class="hero">
-        <img class="hero-image" src="images/mintcupcakesshorter.jpg" alt="Free Delivery on orders over £25">
-        <div class="hero-text">
-          <h1>Free Delivery on orders over £25</h1>
-        </div>
+    <div class="container">
+        <h1 class="site-header">JS Shopping Cart</h1>
+        <a href="https://github.com/MathewDavies/js-shopping-cart" class="top-button">GitHub</a></button>
+        <a href="https://jscart.mathewdavies.uk/demo1.html" class="top-button">Demo Site</a>
+        <br>
+        
+<p>Welcome to JS Shopping Cart, this is a shopping cart module, written in JavaScript that can be added to your ECommerce site.</p>
+
+<p>The cart can be added to your site with a few lines of JavaScript and styled with your own CSS. It also comes with several options to customise functionality.</p>
+<p>Your finished Cart will look something like this:</p>
+
+<img class="centered-image" src="images/cart.png">    
+
+<h2>Set up information </h2> 
+<p>First download the 'cart.js' JavaScript module from GitHub and load this at the top of your page using script tags.</p>
+
+<p>To put a shopping cart where you want on your page, put a Div element on the page with an ID of "cart-container" and load the JavaScript file. Leave the div empty as the JavaScript will populate the file.</p>
+
+<pre>    
+    &lt;div id=&quot;cart-container&quot;&gt; &lt;/div&gt;
+</pre>
+<p>You must then instaniate the cart class and call the render cart method like so:</p>
+<pre>
+&lt;script&gt;
+    let shoppingCart = new Cart('Your Cart');
+    shoppingCart.renderCart();
+&lt;/script&gt;
+</pre>
+
+
+<h2>Options</h2>
+
+<p> There are several options you can have for the cart. These are Cart title, whether to have an element that displays the cart quantity and which currency for the cart. These are all done by putting parameters into the new cart.</p>
+
+<h3>Cart Title</h3>
+<p>As it says on the tin, you can display a custom title on your cart. The default is 'Shopping Cart' but you might want to call it 'Cart' or 'Basket' or something else. When you instantiate the cart, simply put the title down as your first variable.</p>
+
+<p>If you want to alter other variables, you should put in a cart title first, as you will confuse the class otherwise.</p>
+
+<h3>Adding a quantity to your cart display button</h3>
+<img class="image-float-right" src="images/cartbutton.png">
+<p> On sites such as Amazon it is common to have a the number of items displayed in a basket. There is an option for this when you first create the cart object.  If this option is chosen, the module will count the quantity each time you render the cart and put it into local storage and update an element with an id of 'basket-quantity.</p>
+
+<p>As an example, you could display a basket button like so:
+</p>
+
+<pre>
+     &lt;button id=&quot;show-hide-cart&quot;&gt;&lt;span id=&quot;cart-visibility&quot;&gt;Show Cart &lt;/span&gt;&lt;span id=&quot;basket-number&quot;&gt;(0)&lt;/span&gt;&lt;/button&gt;
+</pre>
+
+<p> The text between the basket-number span will be updated when the page loads and with each changing of the cart.</p>
+
+<p>
+To select the option, include 'yes' as the second variable when loading the cart. For example:</p>
+<pre>
+&lt;script&gt;
+    let shoppingCart = new Cart('Your Cart', 'yes');
+&lt;/script&gt;
+</pre>
+<h3>Selecting a currency</h3>
+<p>By default, the cart will display British Pounds as a currency, however this is simple to change by adding in a third Parameter. To display dollars for example, you could instantiate the cart like so:</p>
+
+<pre>
+&lt;script&gt;
+    let shoppingCart = new Cart('Your Cart', 'yes', '$');
+&lt;/script&gt;
+</pre>
+
+<h3> Adding Items to the Cart </h3>
+
+<p>You can add items to the cart by calling the add items method of the class and passing in the item, quantity and price. Both the price and the quantity should be integers - the currency is set as explained above. </p>
+
+<p> An example of calling the function would be:</p>
+
+<pre>
+    shoppingCart.addCartItem(id, item, quantity, price)
+</pre>
+<p>Note that in this case 'shoppingCart is the name of the variable you have named to instantiate the class, with the above examples We are calling the 'addCartFunction' of the 'shoppingCart' object and putting in the item, quantity and price</p>
+
+<p>We cannot provide a specific function to pass get the item, price and quantity as these will differ depending on how you display your pages and what class names and Ids you attach to your products. We have however provided an example of how you might do this on the github by giving the source code to our Demo page.</p>
+
+<h3> Deleting and clearing the cart</h3>
+
+<p>A clear and delete button are provided within the module which allows you to delete items from the cart. </p>
+
+
+<h3> Styling the Cart </h3>
+
+<p> We have provided a style sheet for the cart on Github, called 'cartstyle.css' as an example however it can be styled however you want. Below is a sample of how the cart will typically be rendered - you can base a style sheet on this template. To double check the rendering of the cart, go to the page inspect view the elements.  </p>
+
+<pre>
+
+    &lt;div id=&quot;cart-container&quot; class=&quot;&quot; style=&quot;top: 261px; left: 264px;&quot;&gt;
+    &lt;h2 class=&quot;cart-title&quot;&gt;Your Cart&lt;/h2&gt;
+
+    &lt;table class=&quot;cart-table&quot;&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Item&lt;/th&gt;
+            &lt;th&gt;Quantity&lt;/th&gt;
+            &lt;th&gt;Price&lt;/th&gt;
+            &lt;th&gt;Action&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;table-row&quot;&gt;
+            &lt;td class=&quot;table-row-div&quot;&gt;Chocolate Sprinkle Cake&lt;/td&gt;
+            &lt;td class=&quot;table-row-div&quot;&gt;1&lt;/td&gt;&lt;td class=&quot;table-row-div&quot;&gt;$6.99 &lt;/td&gt;
+            &lt;td class=&quot;table-row-div&quot;&gt;&lt;button class=&quot;remove-button&quot; value=&quot;0&quot;&gt;Remove&lt;/button&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;table-row&quot;&gt;
+            &lt;td class=&quot;table-row-div&quot;&gt;Creme topped Blueberry Muffin&lt;/td&gt;
+            &lt;td class=&quot;table-row-div&quot;&gt;3&lt;/td&gt;&lt;td class=&quot;table-row-div&quot;&gt;$2.45 &lt;/td&gt;
+            &lt;td class=&quot;table-row-div&quot;&gt;&lt;button class=&quot;remove-button&quot; value=&quot;1&quot;&gt;Remove&lt;/button&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;h3 id=&quot;cart-total&quot;&gt;Total: $14.34&lt;/h3&gt;
+    &lt;div class=&quot;empty-cart-div&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;checkout-div&quot;&gt;&lt;button id=&quot;checkout-btn&quot;&gt;Check Out&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+</pre>
+
+<h3> Output </h3>
+
+<p> We have created a checkout button for the cart, which you can attach an event handler so you can take an action. This button is optional so if you wish to have a separate checkout button, simply select no as the fourth option when instantiating the cart object.</p>
+
+<p>For example:</p>
+<pre>
+let shoppingCart = new Cart('Your Cart', 'yes', '$', 'no');
+</pre>
+<p>If you select yes, a button will be rendered as so:</p>
+
+<pre>
+    &lt;button id=&quot;checkout-btn&quot;&gt;Check Out&lt;/button&gt;
+</pre>
+<p>This button doesn't have any functionality, so it is up to you to either manipulate it with JavaScript, for example, by wrapping a form around it and allowing it to execute a PHP post request or by adding a JavaScript Event Handler and attaching an appropriate function. </p>
+
+<p>To get the information from the cart is simple, as it is all in local storage under the variable name 'cart', stored as JSON.</p>
+
+<p>It is also available as a JavaScript  array called customer cart. You could put it into a JavaScript variable as follows:</p>
+
+<pre>
+let cartData = shoppingCart.customerCart;
+</pre>
+<p>Recovering the information this way may be advisable as local storage is not available on every browser.</p>
+
+
+
+
     </div>
-    <!-- This would be rendered by PHP -->
-<div class="main-container">
-    <div class="product-list">
-        <div class="product-container">
-            <div class="product-details">
-                <img class="product-image" src="images/blackforestcupcake.jpg" alt="Black Forest Cup Cake">
-                <div class ="product-description">
-                    <h2 class="product-title">Velvet Cup Cakes</h2>
-                    <h3>Description</h3>
-                    <input type="hidden" name="product-id" class="product-id" value="1203" >
-                    <p>Indulge yourself with Red Velvet Cup Cakes made with delicious cream and wonderful soft sponge.</p>
-                    <p class="price-div">£<span class="price">2.15 </span>Each</p>
-                    <span>Quantity: </span><input class="quantity-input" type="number" value="1" ><br>
-                    <button class="add-to-cart-button">Add to Cart</button>
-                </div>    
-            </div>
-        </div>
-
-        <div class="product-container">
-            <div class="product-details">
-                <img class="product-image" src="images/chocolatesprinklercake.jpg" alt="Chocolate Sprinkler Cake">
-                <div class ="product-description">
-                    <h2 class="product-title">Chocolate Sprinkle Cake</h2>
-                    <h3>Description</h3>
-                    <input type="hidden" name="product-id" class="product-id" value="1243" >
-                    <p>Enjoy a beautiful Hand baked chocolate sponge cake with a full compliment of chocolate icing, topped with sprinkles and smarties</p>
-                    <p>Perfect for Birthdays, anniversaries and celebrations of all kind.</p>
-                    <p class="price-div">£<span class="price">6.99 </span>Each</p>
-                    <span>Quantity: </span><input class="quantity-input" type="number" value="1" ><br>
-                    <button class="add-to-cart-button">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-        <div class="product-container">
-            <div class="product-details">
-                <img class="product-image" src="images/cremetoppedblueberrymuffins.jpg" alt="Creme topped Blueberry Muffins">
-                <div class ="product-description">
-                    <h2 class="product-title">Creme topped Blueberry Muffin</h2>
-                    <h3>Description</h3>
-                    <input type="hidden" name="product-id" class="product-id" value="1213" >
-                    <p>Lorem ipsum dolor is ea minus, dolorum, a in reiciendis illum mollitia ab quae</p>
-                    <p>dolorum tenetur at? Aliquam aut beatae tempora tempore nobis incidunt, recusandae, facilis ipsam maiores maxime inventore asperiores, rerum quia.</p>
-                    <p class="price-div">£<span class="price">2.45 </span>Each</p>
-                    <span>Quantity: </span><input class="quantity-input" type="number" value="1"><br>
-                    <button class="add-to-cart-button">Add to Cart</button>
-                </div>
-            </div>
-    </div> <!--closing product container   -->
-        <div class="product-container">
-        <div class="product-details">
-            <img class="product-image" src="images/strawberrystreuselmuffin.jpg" alt="Strawbery Streusel Muffin">
-            <div class ="product-description">
-                <h2 class="product-title">Strawberry Streusel Muffin</h2>
-                <h3>Description</h3>
-                <input type="hidden" name="product-id" class="product-id" value="1233" >
-                <p>For a sophisticated desert, indulge in our Strawberry Streusel Muffin. Sweet, crunchy and crumbly, this is the perfect indulgence with a late night coffee.</p>
-                <p class="price-div">£<span class="price">2.15 </span>Each</p>
-                <span>Quantity: </span><input class="quantity-input" type="number" value="1"><br>
-                <button class="add-to-cart-button">Add to Cart</button>
-            </div>
-        </div>
-</div> <!--closing product container   -->
-    <div class="product-container">
-        <div class="product-details">
-            <img class="product-image" src="images/pinklovedonut.jpg" alt="Pink Heart Donut">
-            <div class ="product-description">
-                <h2 class="product-title">Pink Heart Donut</h2>
-                <h3>Description</h3>
-                <input type="hidden" name="product-id" class="product-id" value="1253" >
-                <p>You don't have to wait till Valentines day to get a little love in your life. Our Pink Donut is beautifully soft and sweet. Bite in to find gooy strawberry sauce which will delight your taste buds. The only problem you'll have is sharing it with your loved one.</p>
-                <p class="price-div">£<span class="price">1.45 </span>Each</p>
-                <span>Quantity: </span><input class="quantity-input" type="number" value="1"><br>
-                <button class="add-to-cart-button">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div> <!--closing product container   -->
-
-</div>
-    <div id="cart-container"></div>
-
-</div>  <!-- closing main div -->
-<script src="cart.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
